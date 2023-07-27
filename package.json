@@ -11,6 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@vanilla-extract/css": "^1.12.0",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -27,9 +28,12 @@
     "@types/node": "20.4.5",
     "@types/react": "18.2.17",
     "@types/react-dom": "18.2.7",
+    "@vanilla-extract/next-plugin": "^2.2.1",
+    "@vanilla-extract/webpack-plugin": "^2.2.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "eslint-plugin-storybook": "^0.6.13",
+    "mini-css-extract-plugin": "^2.7.6",
     "storybook": "^7.1.1",
     "typescript": "5.1.6"
   }

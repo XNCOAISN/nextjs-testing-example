@@ -20,7 +20,8 @@
     "nanoid": "^4.0.2",
     "next": "13.4.12",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^7.1.1",

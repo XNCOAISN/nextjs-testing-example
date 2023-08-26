@@ -1,9 +1,12 @@
-// import { prisma } from "@/server/db";
-import { createId } from "@/server/utils";
-import { User, kysely } from "@/lib/kysely";
 import { Selectable } from "kysely";
 
-export type CreateUserProps = Pick<User, "name" | "description">;
+import { User, kysely } from "@/lib/kysely";
+import { createId } from "@/server/utils";
+import { validate } from "@/server/utils/validate";
+
+import { CreateUserSchema, createUserSchema } from "./createUserSchema";
+
+export type CreateUserProps = CreateUserSchema;
 
 export type CreateUserOptions<TReturning extends boolean = false> = {
   returning: TReturning;
@@ -14,9 +17,12 @@ export type CreateUserResponse<T extends boolean> = T extends true
   : string;
 
 export const createUser = async <TReturning extends boolean = false>(
-  { name, description }: CreateUserProps,
+  props: CreateUserProps,
   options?: CreateUserOptions<TReturning>
 ): Promise<CreateUserResponse<TReturning>> => {
+  validate(props, createUserSchema);
+  const { name, description } = props;
+
   const userId = createId();
   await kysely
     .insertInto("users")

@@ -1,5 +1,8 @@
 generator client {
-  provider = "prisma-client-js"
+  provider  = "prisma-kysely"
+  output    = "../src/lib/kysely/__generated__"
+  fileName  = "types.ts"
+  camelCase = true
 }
 
 datasource db {
@@ -9,11 +12,25 @@ datasource db {
 }
 
 model User {
-  id          String   @id
+  id          String    @id
   name        String
-  description String   @db.Text
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
+  description String    @db.Text
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  articles    Article[]
 
   @@map("users")
+}
+
+model Article {
+  id        String   @id
+  title     String
+  body      String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+  authorId  String   @map("author_id")
+  author    User     @relation(fields: [authorId], references: [id])
+
+  @@index([authorId])
+  @@map("articles")
 }
